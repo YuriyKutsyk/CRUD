@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user): Application|Factory|View|\Illuminate\Foundation\Application
     {
-        return view('show');
+        return view('show', compact('user'));
     }
 
     /**
