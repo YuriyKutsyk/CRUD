@@ -14,7 +14,7 @@ class UserRepository extends BaseRepository
         return User::query();
     }
 
-    public function create(array $attributes): User
+    public function create(array $attributes): Builder|User
     {
         return $this->query()->create($attributes);
     }
@@ -29,13 +29,6 @@ class UserRepository extends BaseRepository
             ->when($sortBy !== null, fn($query) => $query->orderBy($sortBy, $sortDirection))
             ->with($relations)
             ->get($columns);
-    }
-
-    public function updateOrCreate(array $attributes): User
-    {
-        return $this
-            ->query()
-            ->updateOrCreate($attributes);
     }
 
     public function deleteById(int $id): int

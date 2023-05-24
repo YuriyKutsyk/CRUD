@@ -71,13 +71,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRequest $request): Application|App|RedirectResponse|Redirector
+    public function update(UpdateRequest $request, User $user): Application|App|RedirectResponse|Redirector
     {
-        $this->userRepository->updateOrCreate(
+        $user->update(
             [
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'password' => $request->password
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => password_hash($request->password, PASSWORD_BCRYPT)
             ]
         );
         return redirect()->route('users.index');
