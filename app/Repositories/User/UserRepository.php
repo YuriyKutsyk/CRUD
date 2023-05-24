@@ -37,4 +37,12 @@ class UserRepository extends BaseRepository
             ->query()
             ->updateOrCreate($attributes);
     }
+
+    public function deleteById(int $id): int
+    {
+        return $this
+            ->query()
+            ->where('id', $id)
+            ->delete();
+    }
 }
