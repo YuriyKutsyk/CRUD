@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\User\UserRepository;
+use App\Http\Requests\Users\StoreRequest;
+use App\Http\Requests\Users\UpdateRequest;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 
 class UserController extends Controller
 {
+    public function __construct(public readonly UserRepository $userRepository)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(): Application|Factory|View|\Illuminate\Foundation\Application
     {
-        $users = User::get();
+        $users = $this->userRepository->get();
         return view('index', compact('users'));
     }
 
@@ -30,9 +38,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request): Application|\Illuminate\Foundation\Application|RedirectResponse|Redirector
     {
-        //
+        $this->userRepository->create(
+            [
+                'name'  => $request->name,
+                'email' => $request->email,
+                'password' => password_hash($request->password, PASSWORD_BCRYPT)
+            ]
+        );
+        return redirect()->route('users.index');
     }
 
     /**
@@ -54,9 +69,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateRequest $request): Application|\Illuminate\Foundation\Application|RedirectResponse|Redirector
     {
-        //
+        $this->userRepository->updateOrCreate(
+            [
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'password' => $request->password
+            ]
+        );
+        return redirect()->route('users.index');
     }
 
     /**
