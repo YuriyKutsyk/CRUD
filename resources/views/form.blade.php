@@ -38,8 +38,11 @@
         <div class="row mt-3">
             <div class="col">
                 <input name="password"
-                       value="{{ isset($user) ? $user->password : null }}"
+                       value="{{ old('password', isset($user) ? $user->password : null) }}"
                        type="password" class="form-control" placeholder="Password" aria-label="Password">
+                @error('password')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
             </div>
         </div>
         <div class="row mt-3">

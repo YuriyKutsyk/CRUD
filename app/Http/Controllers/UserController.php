@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index(): Application|Factory|View|App
     {
-        $users = $this->userRepository->get();
+        $users = User::paginate(10);
         return view('index', compact('users'));
     }
 
