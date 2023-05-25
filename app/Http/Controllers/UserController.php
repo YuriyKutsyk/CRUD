@@ -42,14 +42,14 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request): Application|App|RedirectResponse|Redirector
     {
-        $this->userRepository->create(
+        $user = $this->userRepository->create(
             [
                 'name'  => $request->name,
                 'email' => $request->email,
                 'password' => password_hash($request->password, PASSWORD_BCRYPT)
             ]
         );
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withSuccess('Created user '. $user->name);
     }
 
     /**
@@ -80,7 +80,7 @@ class UserController extends Controller
                 'password' => password_hash($request->password, PASSWORD_BCRYPT)
             ]
         );
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->withSuccess('Updated user '. $user->name);
     }
 
     /**
@@ -90,7 +90,7 @@ class UserController extends Controller
     {
         $delete = $this->userRepository->deleteById($user->id);
         if ($delete) {
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')->withDanger('Deleted user '. $user->name);
         }
         return response()->json(['message' => 'Something wrong']);
     }

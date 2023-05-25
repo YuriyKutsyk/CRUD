@@ -31,7 +31,7 @@
                        value="{{ old('email', isset($user) ? $user->email : null) }}"
                        type="text" class="form-control" placeholder="Email" aria-label="Email">
                 @error('email')
-                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
         </div>
@@ -41,7 +41,7 @@
                        value="{{ old('password', isset($user) ? $user->password : null) }}"
                        type="password" class="form-control" placeholder="Password" aria-label="Password">
                 @error('password')
-                <div class="alert alert-danger">{{$message}}</div>
+                    <div class="alert alert-danger">{{$message}}</div>
                 @enderror
             </div>
         </div>
