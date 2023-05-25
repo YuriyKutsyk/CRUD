@@ -73,14 +73,18 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, User $user): Application|App|RedirectResponse|Redirector
     {
-        $user->update(
+        $userUpdate = $this->userRepository->updateById(
             [
-                'name' => $request->name,
+                'name'  => $request->name,
                 'email' => $request->email,
                 'password' => password_hash($request->password, PASSWORD_BCRYPT)
-            ]
+            ],
+            $user->id
         );
-        return redirect()->route('users.index')->withSuccess('Updated user '. $user->name);
+        if ($userUpdate) {
+            return redirect()->route('users.index')->withSuccess('Updated user '. $user->name);
+        }
+        return redirect()->route('users.index')->withDanger('Failed to update data of '. $user->name);
     }
 
     /**
@@ -88,10 +92,10 @@ class UserController extends Controller
      */
     public function destroy(User $user): Application|App|RedirectResponse|Redirector|JsonResponse
     {
-        $delete = $this->userRepository->deleteById($user->id);
-        if ($delete) {
-            return redirect()->route('users.index')->withDanger('Deleted user '. $user->name);
+        $userDelete = $this->userRepository->deleteById($user->id);
+        if ($userDelete !== null) {
+            return redirect()->route('users.index')->withSuccess('Deleted user '. $user->name);
         }
-        return response()->json(['message' => 'Something wrong']);
+        return redirect()->route('users.index')->withDanger('Failed to delete user '. $user->name);
     }
 }

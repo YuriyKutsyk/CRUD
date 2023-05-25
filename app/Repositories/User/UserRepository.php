@@ -18,11 +18,19 @@ class UserRepository extends BaseRepository
         return $this->query()->create($attributes);
     }
 
-    public function deleteById(int $id): int
+    public function deleteById(int $id): ?bool
     {
         return $this
             ->query()
             ->where('id', $id)
             ->delete();
+    }
+
+    public function updateById(array $attributes, int $id): int
+    {
+        return $this
+            ->query()
+            ->where('id', $id)
+            ->update($attributes);
     }
 }

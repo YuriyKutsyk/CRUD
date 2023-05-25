@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
                 'max:255',
                 'email'
                 ],
-            'password' => 'required|string'
+            'password' => 'required|string|min:8'
         ];
         if (!empty($this->user)) {
             $rules['email'][] = Rule::unique('users')->ignore($this->user->id);
