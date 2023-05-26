@@ -1,19 +1,18 @@
 ## Requirements:
-* PHP 8.1
+* PHP 8.1+
 * Laravel 8+
 * Composer
 * MySQL 8.0+
 
-## 1. Install PHP-7.4+
+## 1. Install PHP-8.1+
 
-## 2. Install MySQL 5.7+
+## 2. Install MySQL 8.0+
 
 ## 3. Install all the composer dependencies:
 
 Install the composer (if it is not exists on the server):
 
 [Composer installation manual](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-
 
 ## 4. Clone the git repository:
 https://github.com/YuriyKutsyk/Form-sending-email.git

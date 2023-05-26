@@ -49,7 +49,7 @@ class UserController extends Controller
                 'password' => password_hash($request->password, PASSWORD_BCRYPT)
             ]
         );
-        return redirect()->route('users.index')->withSuccess('Created user '. $user->name);
+        return redirect()->route('users.show', $user->id)->withSuccess('Created user '. $user->name);
     }
 
     /**
@@ -82,7 +82,7 @@ class UserController extends Controller
             $user->id
         );
         if ($userUpdate) {
-            return redirect()->route('users.index')->withSuccess('Updated user '. $user->name);
+            return redirect()->route('users.show', $user->id)->withSuccess('Updated user '. $user->name);
         }
         return redirect()->route('users.index')->withDanger('Failed to update data of '. $user->name);
     }

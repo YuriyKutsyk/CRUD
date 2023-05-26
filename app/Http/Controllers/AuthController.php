@@ -57,7 +57,7 @@ class AuthController extends Controller
             return view('auth.dashboard');
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access...');
+        return redirect("login")->withDanger('Opps! You do not have access...');
     }
 
     public function logout(): Application|App|RedirectResponse|Redirector
