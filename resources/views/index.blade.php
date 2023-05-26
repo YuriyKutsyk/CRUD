@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Users')
+@section('title', 'List of users')
 
 @section('content')
     <a class="btn btn-primary" role="button" href="{{ route('users.create') }}">Create user</a>
@@ -34,6 +34,8 @@
             </td>
         </tr>
         @endforeach
+        <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+
         </tbody>
     </table>
 
