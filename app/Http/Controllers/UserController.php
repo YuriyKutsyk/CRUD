@@ -93,7 +93,7 @@ class UserController extends Controller
     public function destroy(User $user): Application|App|RedirectResponse|Redirector|JsonResponse
     {
         $userDelete = $this->userRepository->deleteById($user->id);
-        if ($userDelete !== null) {
+        if ($userDelete) {
             return redirect()->route('users.index')->withSuccess('Deleted user '. $user->name);
         }
         return redirect()->route('users.index')->withDanger('Failed to delete user '. $user->name);
