@@ -15,6 +15,7 @@ Install the composer (if it is not exists on the server):
 [Composer installation manual](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
 
 ## 4. Clone the git repository:
+
 https://github.com/YuriyKutsyk/CRUD.git
 
 Switch to the project directory:
